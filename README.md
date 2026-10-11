@@ -36,16 +36,16 @@ SkillForge is a full-stack web application built using Python and Django. It is 
 Wireframes were planned prior to development to establish the layout and responsive design across mobile, tablet, and desktop viewports:
 
 * **Complete Responsive Grid Overview:**
-  ![All Wireframes Grid](wireframes/mobile_screen_tablet_view_desktop_screen.png)[cite: 5]
+  ![All Wireframes Grid](skillforge/wireframes/mobile_screen_tablet_view_desktop_screen.png)
 
 * **Login Page:**
-  ![Login Wireframe](wireframes/wireframe_login.png)[cite: 6]
+  ![Login Wireframe](skillforge/wireframes/wireframe_login.png)
 
 * **Dashboard View:**
-  ![Dashboard Wireframe](wireframes/wireframe_dashboard.png)[cite: 4]
+  ![Dashboard Wireframe](skillforge/wireframes/wireframe_dashboard.png)
 
 * **Skill Detail View:**
-  ![Skill Detail Wireframe](wireframes/wireframe_skill_detail.png)[cite: 3]
+  ![Skill Detail Wireframe](skillforge/wireframes/wireframe_skill_detail.png)
 
 
 ## User Stories
