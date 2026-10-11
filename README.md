@@ -1,4 +1,4 @@
-# SkillForge 🚀
+# SkillForge 
 
 [View Live Website](#) *(Insert your Heroku or Render live URL here)*
 
@@ -59,17 +59,17 @@ To guide the development of SkillForge, user stories were defined and categorize
 
 ## Features
 
-### 🔐 Authentication & Security
+###  Authentication & Security
 * Secure user login and logout system powered by Django's built-in auth views.
 * Route protection (`@login_required`) ensuring users can only access and modify their own data.
 * Environment variable management using `python-dotenv` to safeguard secret keys and database settings.
 
-### 📊 Dashboard & Skill Management
+###  Dashboard & Skill Management
 * **Dashboard View:** Displays all user-owned skills organized neatly into Bootstrap cards with category and status indicators.
 * **Skill Creation & Editing:** Dedicated forms to create new skills or update existing titles, descriptions, and statuses.
 * **Deletion Protection:** Confirmation screens before deleting any skill or related record.
 
-### 📚 Resources & Study Logs
+###  Resources & Study Logs
 * **Resource Tracking:** Attach links, resource types (Article, Video, Course, Book), and personal notes to any skill.
 * **Study Session Logging:** Track time spent studying by recording dates, session durations in minutes, and reflection notes.
 
