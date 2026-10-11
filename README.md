@@ -129,15 +129,20 @@ During development, several technical challenges were identified and resolved:
   * *Fix:* Created a custom `logged_out.html` template extending `base.html` with Bootstrap styles and configured `LOGOUT_REDIRECT_URL = 'login'` in `settings.py`.
 
 
-## Deployment
+### Deployment
 
-The project was deployed to Heroku (or Render) following these production steps:
+The application has been deployed to **Render** using the following steps:
 
-1. Installed production packages (`gunicorn` and `whitenoise`) and updated `requirements.txt`.
-2. Configured `WhiteNoiseMiddleware` inside `settings.py` for efficient static file handling.
-3. Created a `Procfile` in the root directory containing:
-   ```text
-   web: gunicorn skillforge_project.wsgi:application
+1. Create a new **Web Service** on [Render](https://render.com) and connect your GitHub repository (`skillforge`).
+2. Set the environment details:
+   - **Environment:** `Python 3`
+   - **Build Command:** `pip install -r requirements.txt && python manage.py migrate`
+   - **Start Command:** `gunicorn skillforge_project.wsgi:application`
+3. Add the required **Environment Variables** in the Render dashboard:
+   - `SECRET_KEY`
+   - `DEBUG` (`False`)
+   - `ALLOWED_HOSTS` (`skillforge-uwws.onrender.com`)
+4. Click **Create Web Service** to build and deploy the application.
 
 
 ## Credits & Acknowledgements
@@ -150,3 +155,5 @@ The project was deployed to Heroku (or Render) following these production steps:
 
 ### Media & Assets
 * **Emojis:** Native system emojis utilized for clean UI icon accents across navigation and action buttons.   
+* **Media & Design:**
+  - Wireframes were designed to map out mobile, tablet, and desktop viewports prior to development.
