@@ -33,10 +33,19 @@ SkillForge is a full-stack web application built using Python and Django. It is 
 * **Typography:** Clean system sans-serif fonts for optimal legibility across all devices.
 
 ### Wireframes
-Wireframes were planned prior to development to establish the layout and responsive design across three main screen sizes (Mobile, Tablet, and Desktop):
-* **Dashboard View:** Designed with a flexible card grid that stacks single-column on mobile screens and expands to a 3-column layout on desktop viewports.
-* **Skill Detail View:** Structured to display core skill attributes at the top, split into dual side-by-side management cards for resources and study sessions on larger screens, collapsing cleanly on mobile devices.
-* **Form & Authentication Views:** Centered, single-column container layouts optimized for easy form entry across all device sizes.
+Wireframes were planned prior to development to establish the layout and responsive design across mobile, tablet, and desktop viewports:
+
+* **Complete Responsive Grid Overview:**
+  ![All Wireframes Grid](wireframes/mobile_screen_tablet_view_desktop_screen.png)[cite: 5]
+
+* **Login Page:**
+  ![Login Wireframe](wireframes/wireframe_login.png)[cite: 6]
+
+* **Dashboard View:**
+  ![Dashboard Wireframe](wireframes/wireframe_dashboard.png)[cite: 4]
+
+* **Skill Detail View:**
+  ![Skill Detail Wireframe](wireframes/wireframe_skill_detail.png)[cite: 3]
 
 
 ## User Stories
