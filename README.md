@@ -4,7 +4,6 @@
 
 SkillForge is a full-stack web application built using Python and Django. It is designed to act as a centralized personal learning hub where users can track technical skills, organize and evaluate learning resources (such as documentation, courses, and videos), and log timed study sessions to monitor progress over time.
 
----
 
 ## Table of Contents
 1. [UX & UI Design](#ux--ui-design)
@@ -16,7 +15,6 @@ SkillForge is a full-stack web application built using Python and Django. It is 
 7. [Deployment](#deployment)
 8. [Credits & Acknowledgements](#credits--acknowledgements)
 
----
 
 ## UX & UI Design
 
@@ -40,7 +38,6 @@ Wireframes were planned prior to development to establish the layout and respons
 * **Skill Detail View:** Structured to display core skill attributes at the top, split into dual side-by-side management cards for resources and study sessions on larger screens, collapsing cleanly on mobile devices.
 * **Form & Authentication Views:** Centered, single-column container layouts optimized for easy form entry across all device sizes.
 
----
 
 ## User Stories
 
@@ -59,7 +56,6 @@ To guide the development of SkillForge, user stories were defined and categorize
 * As a power user, I want to log study sessions with duration times and reflections.
 * As a power user, I want to update or delete skills, resources, and sessions whenever my learning goals change.
 
----
 
 ## Features
 
@@ -77,7 +73,6 @@ To guide the development of SkillForge, user stories were defined and categorize
 * **Resource Tracking:** Attach links, resource types (Article, Video, Course, Book), and personal notes to any skill.
 * **Study Session Logging:** Track time spent studying by recording dates, session durations in minutes, and reflection notes.
 
----
 
 ## Database Schema & Architecture
 
@@ -89,7 +84,6 @@ SkillForge uses Django's Object-Relational Mapper (ORM) with an SQLite database 
 * **Resource Model:** Linked to a Skill via a Foreign Key (`skill = models.ForeignKey(Skill, on_delete=models.CASCADE)`). Fields include `title`, `url`, `resource_type`, and `notes`.
 * **StudySession Model:** Linked to a Skill via a Foreign Key (`skill = models.ForeignKey(Skill, on_delete=models.CASCADE)`). Fields include `date`, `duration_minutes`, and `reflection_notes`.
 
----
 
 ## Technologies Used
 
@@ -100,7 +94,6 @@ SkillForge uses Django's Object-Relational Mapper (ORM) with an SQLite database 
 * **Production Utilities:** Gunicorn (WSGI HTTP server), WhiteNoise (Static file management)
 * **Version Control:** Git & GitHub
 
----
 
 ## Testing
 
@@ -115,7 +108,17 @@ Testing was performed continuously throughout development, mapping features dire
 | **Delete Confirmation** | Clicking delete prompts a confirmation screen; confirming successfully removes the record. | **PASS** |
 | **Responsive Layout** | Navigation bar and cards collapse and rearrange correctly on mobile screens. | **PASS** |
 
----
+### Known Bugs & Resolved Issues
+
+During development, several technical challenges were identified and resolved:
+
+* **Module Imports Issue (`ModuleNotFoundError: No module named 'skill_tracker'`):**
+  * *Issue:* Initial routing configuration pointed to `skill_tracker.urls`, but the application directory was named `skills`.
+  * *Fix:* Updated `skillforge_project/urls.py` and `settings.py` (`INSTALLED_APPS`) to reference `skills` uniformly across the project.
+* **Unstyled Admin Logout Screen:**
+  * *Issue:* Triggering the built-in Django logout view initially rendered Django's unstyled default admin template.
+  * *Fix:* Created a custom `logged_out.html` template extending `base.html` with Bootstrap styles and configured `LOGOUT_REDIRECT_URL = 'login'` in `settings.py`.
+
 
 ## Deployment
 
@@ -126,3 +129,15 @@ The project was deployed to Heroku (or Render) following these production steps:
 3. Created a `Procfile` in the root directory containing:
    ```text
    web: gunicorn skillforge_project.wsgi:application
+
+
+## Credits & Acknowledgements
+
+### Code & Frameworks
+* **Django Web Framework:** Used as the backend full-stack framework ([Django Project](https://www.djangoproject.com/)).
+* **Bootstrap 5:** CSS framework and JavaScript bundle used for responsive layouts and components ([Bootstrap 5 Documentation](https://getbootstrap.com/docs/5.3/getting-started/introduction/)).
+* **WhiteNoise:** Middleware used for static file serving in production environments ([WhiteNoise Docs](https://whitenoise.readthedocs.io/)).
+* **Gunicorn:** WSGI HTTP Server for UNIX deployment ([Gunicorn Docs](https://gunicorn.org/)).
+
+### Media & Assets
+* **Emojis:** Native system emojis utilized for clean UI icon accents across navigation and action buttons.   
