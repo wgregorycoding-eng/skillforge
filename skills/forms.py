@@ -1,8 +1,17 @@
 from django import forms
+from django.contrib.auth.forms import PasswordResetForm  # <-- Make sure this is imported!
 from .models import Skill, Resource, StudySession, Category
 
+class CustomPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Enter your email address...'
+        })
+
 class SkillForm(forms.ModelForm):
-    # Treat category as a text input field in the form
+
     category = forms.CharField(
         required=False,
         widget=forms.TextInput(attrs={
@@ -26,7 +35,7 @@ class SkillForm(forms.ModelForm):
         category_name = self.cleaned_data.get('category')
         if category_name:
             category_name = category_name.strip()
-            # Find existing category or create a new one dynamically
+         
             category_obj, created = Category.objects.get_or_create(name=category_name)
             return category_obj
         return None
@@ -55,11 +64,3 @@ class StudySessionForm(forms.ModelForm):
         }
         
         from django.contrib.auth.forms import PasswordResetForm
-
-class CustomPasswordResetForm(PasswordResetForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['email'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'Enter your email address...'
-        })
