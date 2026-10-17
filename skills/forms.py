@@ -1,16 +1,35 @@
 from django import forms
-from .models import Skill, Resource, StudySession
+from .models import Skill, Resource, StudySession, Category
 
 class SkillForm(forms.ModelForm):
+    # Treat category as a text input field in the form
+    category = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={
+            'list': 'category-options',
+            'class': 'form-control',
+            'placeholder': 'Select or type a custom category...'
+        })
+    )
+
     class Meta:
         model = Skill
         fields = ['category', 'title', 'description', 'status']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'category': forms.TextInput(attrs={'list': 'category-options', 'class': 'form-control', 'placeholder': 'Select or type a category...'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
             'status': forms.Select(attrs={'class': 'form-control'}),
         }
+
+    def clean_category(self):
+        """Automatically get or create the category object from the typed string."""
+        category_name = self.cleaned_data.get('category')
+        if category_name:
+            category_name = category_name.strip()
+            # Find existing category or create a new one dynamically
+            category_obj, created = Category.objects.get_or_create(name=category_name)
+            return category_obj
+        return None
 
 
 class ResourceForm(forms.ModelForm):

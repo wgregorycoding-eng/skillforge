@@ -45,7 +45,7 @@ class Resource(models.Model):
     notes = models.TextField(blank=True)
 
     def __str__(self):
-        return f"{self.title} - {self.resource_type}"
+        return f"{self.title} ({self.resource_type})"
 
 
 class StudySession(models.Model):
