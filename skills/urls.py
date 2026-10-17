@@ -7,4 +7,5 @@ urlpatterns = [
     path('skill/new/', views.skill_create, name='skill_create'),
     path('skill/<int:pk>/edit/', views.skill_update, name='skill_update'),
     path('skill/<int:pk>/delete/', views.skill_delete, name='skill_delete'),
+    path('register/', views.register, name='register'),
 ]

@@ -1,0 +1,15 @@
+{% extends 'skills/base.html' %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 500px;">
+    <h2>Register for SkillForge</h2>
+    <form method="POST" class="mt-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+    </form>
+    <p class="mt-3 text-center">
+        Already have an account? <a href="{% url 'login' %}">Log in here</a>
+    </p>
+</div>
+{% endblock %}
