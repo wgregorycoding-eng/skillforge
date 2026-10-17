@@ -25,9 +25,11 @@ urlpatterns = [
         template_name='registration/password_reset_complete.html'
     ), name='password_reset_complete'),
     
-    # Custom login view
-    path('accounts/login/', auth_views.LoginView.as_view(template_name='skills/login.html'), name='login'),
     
-    # Other built-in auth routes (like logout)
+    path('accounts/login/', auth_views.LoginView.as_view(
+        template_name='skills/login.html'
+    ), name='login'),
+    
+    
     path('accounts/', include('django.contrib.auth.urls')),
 ]
