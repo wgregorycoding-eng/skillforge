@@ -9,7 +9,7 @@ from .forms import SkillForm, ResourceForm, StudySessionForm
 def dashboard(request):
     user_skills = Skill.objects.filter(user=request.user)
     context = {'skills': user_skills}
-    return render(request, 'skills/dashboard.html', context)
+    return render(request, 'dashboard.html', context)
 
 
 @login_required
@@ -44,7 +44,7 @@ def skill_detail(request, pk):
         'resource_form': resource_form,
         'session_form': session_form,
     }
-    return render(request, 'skills/skill_detail.html', context)
+    return render(request, 'skill_detail.html', context)
 
 
 @login_required
@@ -58,7 +58,7 @@ def skill_create(request):
             return redirect('dashboard')
     else:
         form = SkillForm()
-    return render(request, 'skills/skill_form.html', {'form': form})
+    return render(request, 'skill_form.html', {'form': form})
 
 
 @login_required
@@ -71,7 +71,7 @@ def skill_update(request, pk):
             return redirect('skill_detail', pk=skill.pk)
     else:
         form = SkillForm(instance=skill)
-    return render(request, 'skills/skill_form.html', {'form': form, 'edit': True})
+    return render(request, 'skill_form.html', {'form': form, 'edit': True})
 
 
 @login_required
@@ -80,7 +80,7 @@ def skill_delete(request, pk):
     if request.method == 'POST':
         skill.delete()
         return redirect('dashboard')
-    return render(request, 'skills/skill_confirm_delete.html', {'skill': skill})
+    return render(request, 'skill_confirm_delete.html', {'skill': skill})
 
 
 def register(request):
@@ -93,4 +93,4 @@ def register(request):
             return redirect('login')
     else:
         form = UserCreationForm()
-    return render(request, 'skills/register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
