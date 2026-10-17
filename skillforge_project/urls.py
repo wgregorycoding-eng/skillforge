@@ -25,11 +25,11 @@ urlpatterns = [
         template_name='registration/password_reset_complete.html'
     ), name='password_reset_complete'),
     
-    
+    # Custom login view pointing to the registration folder where Django expects it
     path('accounts/login/', auth_views.LoginView.as_view(
-        template_name='skills/login.html'
+        template_name='registration/login.html'
     ), name='login'),
     
-    
+    # Other built-in auth routes
     path('accounts/', include('django.contrib.auth.urls')),
 ]

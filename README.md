@@ -1,4 +1,4 @@
-# SkillForge 
+# SkillForge 🚀
 
 [View Live Website](https://skillforge-uwws.onrender.com)
 
@@ -71,16 +71,112 @@ To guide the development of SkillForge, user stories were defined and categorize
 
 ## Features
 
-### Authentication & Security
+### 🔐 Authentication & Security
 - Secure user login, registration, and logout system powered by Django's built-in auth system.
 - Complete self-service password reset workflow (`PasswordResetView`, `PasswordResetDoneView`, `PasswordResetConfirmView`, `PasswordResetCompleteView`).
 - Route protection (`@login_required`) ensuring users can only access, view, and modify their own data.
 - Environment variable management using `python-dotenv` to safeguard secret keys and database settings.
 
-###  Custom Form Controls & Dynamic Theming
+### 🎨 Custom Form Controls & Dynamic Theming
 - Custom form subclasses (`CustomPasswordResetForm`) enforcing consistent Bootstrap `form-control` styles and placeholders across auth forms.
 - Dark/Light theme toggling mechanism seamlessly styled across navigation, dashboards, and authentication views.
 
-###  Dashboard & Skill Management
+### 📊 Dashboard & Skill Management
 - **Dashboard View:** Displays all user-owned skills organized neatly into Bootstrap cards with category and status indicators.
 - **Skill Creation & Editing:** Dedicated forms to create new skills or update existing titles, descriptions, and statuses.
+- **Deletion Protection:** Confirmation screens before deleting any skill or related record.
+
+### 📚 Resources & Study Logs
+- **Resource Tracking:** Attach links, resource types (Article, Video, Course, Book), and personal notes to any skill.
+- **Study Session Logging:** Track time spent studying by recording dates, session durations in minutes, and reflection notes.
+
+
+## Database Schema & Architecture
+
+SkillForge uses Django's Object-Relational Mapper (ORM) with an SQLite database during development and is fully compatible with PostgreSQL in production via `dj-database-url`.
+
+- **User Model:** Built-in Django `User` model.
+- **Category Model:** Represents broad topics (e.g., *Programming*, *Languages*, *Design*).
+- **Skill Model:** Linked to a User via a Foreign Key (`user = models.ForeignKey(User, on_delete=models.CASCADE)`). Fields include `title`, `description`, `status`, and `created_at`.
+- **Resource Model:** Linked to a Skill via a Foreign Key (`skill = models.ForeignKey(Skill, on_delete=models.CASCADE)`). Fields include `title`, `url`, `resource_type`, and `notes`.
+- **StudySession Model:** Linked to a Skill via a Foreign Key (`skill = models.ForeignKey(Skill, on_delete=models.CASCADE)`). Fields include `date`, `duration_minutes`, and `reflection_notes`.
+
+
+## Technologies Used
+
+- **Languages:** Python 3.14, HTML5, CSS3
+- **Framework:** Django 6.1 (Full-stack Web Framework)
+- **Frontend Styling:** Bootstrap 5 (CSS framework & bundle scripts)
+- **Database:** SQLite (Development) / PostgreSQL-ready (`dj-database-url`)
+- **Production Utilities:** Gunicorn (WSGI HTTP server), WhiteNoise (Static file management)
+- **Version Control:** Git & GitHub
+
+
+## Testing
+
+Testing was performed continuously throughout development, mapping features directly back to the initial user stories:
+
+| Test Case | Expected Outcome | Pass/Fail |
+| :--- | :--- | :--- |
+| **User Authentication** | Unauthenticated users trying to visit protected routes are redirected to the login page. | **PASS** |
+| **Password Reset Request** | Submitting an email on `/accounts/password_reset/` generates a styled confirmation view without throwing 500 or `NoReverseMatch` errors. | **PASS** |
+| **Dashboard Loading** | Logged-in users see their specific skills displayed in responsive cards. | **PASS** |
+| **Create Skill** | Submitting the skill form adds a new record to the database and redirects to the dashboard. | **PASS** |
+| **Add Resource/Session** | Filling out resource/session forms on a skill detail page successfully saves the record and updates the view. | **PASS** |
+| **Delete Confirmation** | Clicking delete prompts a confirmation screen; confirming successfully removes the record. | **PASS** |
+| **Responsive Layout** | Navigation bar and cards collapse and rearrange correctly on mobile screens. | **PASS** |
+
+
+## Deployment
+
+The application is deployed to **Render** using the following procedure:
+
+1. Create a new **Web Service** on [Render](https://render.com) connected to the GitHub repository (`skillforge`).
+2. Configure build and runtime environment settings:
+   - **Environment:** `Python 3`
+   - **Build Command:** `pip install -r requirements.txt && python manage.py migrate`
+   - **Start Command:** `gunicorn skillforge_project.wsgi:application`
+3. Add the required **Environment Variables** in the Render dashboard:
+   - `SECRET_KEY`
+   - `DEBUG` (`False`)
+   - `ALLOWED_HOSTS` (`skillforge-uwws.onrender.com`)
+4. Trigger manual or automatic deployment on pushes to `main`.
+
+
+## Troubleshooting & Engineering Fixes Log
+
+During development and production deployment on Render, several technical challenges and deployment hurdles were successfully resolved:
+
+* **URL Namespace & Reverse Lookup Errors (`NoReverseMatch`)**:
+  - *Issue:* Django threw `NoReverseMatch` exceptions when attempting to resolve built-in authentication routes like `password_reset` alongside app-level URL includes.
+  - *Fix:* Refactored project-level `urls.py` to explicitly declare named paths for all password reset endpoints (`name='password_reset'`, `name='password_reset_done'`, etc.) prior to including `django.contrib.auth.urls`.
+
+* **Form Styling & Bootstrap Integration**:
+  - *Issue:* Django's native authentication forms rendered plain HTML inputs that broke UI consistency.
+  - *Fix:* Implemented custom form subclasses (`CustomPasswordResetForm`) in `forms.py` to programmatically inject `form-control` CSS classes and placeholders into form fields.
+
+* **Template Directory Resolution & Naming Conventions**:
+  - *Issue:* Django's template loader failed to locate built-in authentication views when templates were stored in irregular app path levels or named with hyphens.
+  - *Fix:* Standardized template structure under `skills/templates/registration/` with exact underscored filenames (`password_reset_form.html`, `password_reset_done.html`, `password_reset_confirm.html`, `password_reset_complete.html`).
+
+* **Module Imports & App Namespacing (`ModuleNotFoundError`)**:
+  - *Issue:* Initial routing configuration pointed to `skill_tracker.urls`, but the application directory was named `skills`.
+  - *Fix:* Updated `skillforge_project/urls.py` and `settings.py` (`INSTALLED_APPS`) to reference `skills` uniformly across the project.
+
+* **Unstyled Admin Logout Screen**:
+  - *Issue:* Triggering the built-in Django logout view initially rendered Django's unstyled default admin template.
+  - *Fix:* Created a custom `logged_out.html` template extending `base.html` with Bootstrap styles and configured `LOGOUT_REDIRECT_URL = 'login'` in `settings.py`.
+
+
+## Credits & Acknowledgements
+
+### Code & Frameworks
+- **Django Web Framework:** Used as the backend full-stack framework ([Django Project](https://www.djangoproject.com/)).
+- **Bootstrap 5:** CSS framework and JavaScript bundle used for responsive layouts and components ([Bootstrap 5 Documentation](https://getbootstrap.com/docs/5.3/getting-started/introduction/)).
+- **WhiteNoise:** Middleware used for static file serving in production environments ([WhiteNoise Docs](https://whitenoise.readthedocs.io/)).
+- **Gunicorn:** WSGI HTTP Server for UNIX deployment ([Gunicorn Docs](https://gunicorn.org/)).
+
+### Media & Assets
+- **Emojis:** Native system emojis utilized for clean UI icon accents across navigation and action buttons.   
+- **Media & Design:**
+  - Wireframes were designed to map out mobile, tablet, and desktop viewports prior to development.
