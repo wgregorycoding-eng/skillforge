@@ -9,12 +9,13 @@ urlpatterns = [
     
     
     path('accounts/password_reset/', auth_views.PasswordResetView.as_view(
-        form_class=CustomPasswordResetForm
+        form_class=CustomPasswordResetForm,
+        template_name='skills/registration/password_reset_form.html'
     ), name='password_reset'),
     
-    #
+    # Custom login view
     path('accounts/login/', auth_views.LoginView.as_view(template_name='skills/login.html'), name='login'),
     
-    # Include all other built-in auth routes (password reset done, confirm, complete, logout, etc.)
+    # All other auth routes
     path('accounts/', include('django.contrib.auth.urls')),
 ]

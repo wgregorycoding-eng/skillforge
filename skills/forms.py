@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import PasswordResetForm  # <-- Make sure this is imported!
+from django.contrib.auth.forms import PasswordResetForm
 from .models import Skill, Resource, StudySession, Category
 
 class CustomPasswordResetForm(PasswordResetForm):
