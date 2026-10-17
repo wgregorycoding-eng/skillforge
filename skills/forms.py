@@ -7,7 +7,11 @@ class SkillForm(forms.ModelForm):
         fields = ['category', 'title', 'description', 'status']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'category': forms.Select(attrs={'class': 'form-control'}),
+            'category': forms.TextInput(attrs={
+                'class': 'form-control', 
+                'list': 'category-options', 
+                'placeholder': 'Select or type a category...'
+            }),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
             'status': forms.Select(attrs={'class': 'form-control'}),
         }
@@ -26,11 +30,5 @@ class ResourceForm(forms.ModelForm):
 
 
 class StudySessionForm(forms.ModelForm):
-    class Meta:
-        model = StudySession
-        fields = ['date', 'duration_minutes', 'reflection_notes']
-        widgets = {
-            'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            'duration_minutes': forms.NumberInput(attrs={'class': 'form-control'}),
-            'reflection_notes': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-        }
+    class Meta
+    

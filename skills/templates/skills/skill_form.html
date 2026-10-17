@@ -8,6 +8,17 @@
                 <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
+
+                    <!-- Datalist providing preset suggestions while allowing custom input -->
+                    <datalist id="category-options">
+                        <option value="Programming">
+                        <option value="Design">
+                        <option value="Languages">
+                        <option value="Business">
+                        <option value="Music">
+                        <option value="Fitness">
+                    </datalist>
+
                     <button type="submit" class="btn btn-success w-100 py-2 mt-3">{% if edit %}Save Changes{% else %}Create Skill{% endif %}</button>
                 </form>
                 <div class="text-center mt-3">
