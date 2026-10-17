@@ -7,15 +7,27 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('skills.urls')),
     
-    
+    # Password Reset Overrides
     path('accounts/password_reset/', auth_views.PasswordResetView.as_view(
         form_class=CustomPasswordResetForm,
-        template_name='skills/registration/password_reset_form.html'
+        template_name='registration/password_reset_form.html'
     ), name='password_reset'),
+    
+    path('accounts/password_reset/done/', auth_views.PasswordResetDoneView.as_view(
+        template_name='registration/password_reset_done.html'
+    ), name='password_reset_done'),
+    
+    path('accounts/reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
+        template_name='registration/password_reset_confirm.html'
+    ), name='password_reset_confirm'),
+    
+    path('accounts/reset/done/', auth_views.PasswordResetCompleteView.as_view(
+        template_name='registration/password_reset_complete.html'
+    ), name='password_reset_complete'),
     
     # Custom login view
     path('accounts/login/', auth_views.LoginView.as_view(template_name='skills/login.html'), name='login'),
     
-    # All other auth routes
+    # Other built-in auth routes (like logout)
     path('accounts/', include('django.contrib.auth.urls')),
 ]
