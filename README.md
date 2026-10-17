@@ -1,4 +1,4 @@
-# SkillForge 🚀
+# SkillForge 
 
 [View Live Website](https://skillforge-uwws.onrender.com)
 
@@ -71,22 +71,22 @@ To guide the development of SkillForge, user stories were defined and categorize
 
 ## Features
 
-### 🔐 Authentication & Security
+###  Authentication & Security
 - Secure user login, registration, and logout system powered by Django's built-in auth system.
 - Complete self-service password reset workflow (`PasswordResetView`, `PasswordResetDoneView`, `PasswordResetConfirmView`, `PasswordResetCompleteView`).
 - Route protection (`@login_required`) ensuring users can only access, view, and modify their own data.
 - Environment variable management using `python-dotenv` to safeguard secret keys and database settings.
 
-### 🎨 Custom Form Controls & Dynamic Theming
+###  Custom Form Controls & Dynamic Theming
 - Custom form subclasses (`CustomPasswordResetForm`) enforcing consistent Bootstrap `form-control` styles and placeholders across auth forms.
 - Dark/Light theme toggling mechanism seamlessly styled across navigation, dashboards, and authentication views.
 
-### 📊 Dashboard & Skill Management
+###  Dashboard & Skill Management
 - **Dashboard View:** Displays all user-owned skills organized neatly into Bootstrap cards with category and status indicators.
 - **Skill Creation & Editing:** Dedicated forms to create new skills or update existing titles, descriptions, and statuses.
 - **Deletion Protection:** Confirmation screens before deleting any skill or related record.
 
-### 📚 Resources & Study Logs
+###  Resources & Study Logs
 - **Resource Tracking:** Attach links, resource types (Article, Video, Course, Book), and personal notes to any skill.
 - **Study Session Logging:** Track time spent studying by recording dates, session durations in minutes, and reflection notes.
 
