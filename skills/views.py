@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 from .models import Skill, Resource, StudySession
 from .forms import SkillForm, ResourceForm, StudySessionForm
 
@@ -80,9 +82,6 @@ def skill_delete(request, pk):
         return redirect('dashboard')
     return render(request, 'skills/skill_confirm_delete.html', {'skill': skill})
 
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
 
 def register(request):
     if request.method == 'POST':

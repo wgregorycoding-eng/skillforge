@@ -1,24 +1,28 @@
 {% extends 'skills/base.html' %}
 
 {% block content %}
-<div class="container mt-5" style="max-width: 500px;">
-    <h2>Log In to SkillForge</h2>
+<div class="d-flex justify-content-center align-items-center mt-5">
+    <div class="card p-4 shadow-sm" style="width: 100%; max-width: 420px;">
+        <h3 class="text-center mb-4">🔐 Login to SkillForge</h3>
 
-    <!-- Login Form -->
-    <form method="POST" class="mt-4">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary w-100">Log In</button>
-    </form>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
 
-    <!-- Navigation Links -->
-    <div class="mt-4 text-center">
-        <p class="mb-1">
-            Don't have an account? <a href="{% url 'register' %}">Register here</a>
-        </p>
-        <p class="mb-0">
-            <a href="{% url 'password_reset' %}">Forgot your password?</a>
-        </p>
+            <button type="submit" class="btn btn-dark w-100 mb-3">Login</button>
+        </form>
+
+        <hr class="my-3">
+        <div class="text-center">
+            <p class="mb-2">Don't have an account?</p>
+            <a href="{% url 'register' %}" class="btn btn-outline-primary w-100 mb-2">Register Here</a>
+            <small>
+                <a href="{% url 'password_reset' %}" class="text-muted">Forgot your password?</a>
+            </small>
+        </div>
     </div>
 </div>
 {% endblock %}
