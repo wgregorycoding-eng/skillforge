@@ -53,3 +53,13 @@ class StudySessionForm(forms.ModelForm):
             'duration_minutes': forms.NumberInput(attrs={'class': 'form-control'}),
             'reflection_notes': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
         }
+        
+        from django.contrib.auth.forms import PasswordResetForm
+
+class CustomPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Enter your email address...'
+        })
