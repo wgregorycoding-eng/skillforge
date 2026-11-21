@@ -2,8 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .models import Skill, Resource, StudySession
+from .models import Skill
 from .forms import SkillForm, ResourceForm, StudySessionForm
+
 
 @login_required
 def dashboard(request):
@@ -17,7 +18,7 @@ def skill_detail(request, pk):
     skill = get_object_or_404(Skill, pk=pk, user=request.user)
     resources = skill.resources.all()
     sessions = skill.sessions.all()
-    
+
     resource_form = ResourceForm()
     session_form = StudySessionForm()
 
@@ -89,7 +90,10 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}! You can now log in.')
+            messages.success(
+                request,
+                f'Account created for {username}! You can now log in.',
+            )
             return redirect('login')
     else:
         form = UserCreationForm()
