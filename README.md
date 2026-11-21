@@ -127,6 +127,24 @@ Testing was performed continuously throughout development, mapping features dire
 | **Responsive Layout** | Navigation bar and cards collapse and rearrange correctly on mobile screens. | **PASS** |
 
 
+## Code Quality & Validation (MSP3 1.6)
+
+### Python PEP8 Compliance
+All Python files in the `skills` app were checked using `flake8` and resolved to zero style warnings or errors.
+
+![PEP8 Flake8 Compliance](screenshots/pep8-flake8.png)
+
+### HTML Validation
+Rendered HTML pages were checked using the W3C Markup Validation Service.
+
+![W3C HTML Validation](screenshots/w3c-html-validation.png)
+
+### CSS Validation
+Stylesheets were checked using the W3C CSS Validation Service.
+
+![W3C CSS Validation](screenshots/w3c-css-validation.png)
+
+
 ## Deployment
 
 The application is deployed to **Render** using the following procedure:
